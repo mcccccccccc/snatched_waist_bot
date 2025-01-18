@@ -1,0 +1,176 @@
+WARNING:aiogram.dispatcher:Received SIGINT signal
+INFO:aiogram.dispatcher:Polling stopped for bot @snatched_waist_bot id=7489659416 - 'snatched_waist'
+INFO:aiogram.dispatcher:Polling stopped
+INFO:aiogram.dispatcher:Start polling
+INFO:aiogram.dispatcher:Run polling for bot @snatched_waist_bot id=7489659416 - 'snatched_waist'
+INFO:root:Command: /set_profile from 6954257
+INFO:aiogram.event:Update id=446795972 is handled. Duration 242 ms by bot id=7489659416
+INFO:aiogram.event:Update id=446795973 is handled. Duration 156 ms by bot id=7489659416
+INFO:aiogram.event:Update id=446795974 is handled. Duration 138 ms by bot id=7489659416
+INFO:aiogram.event:Update id=446795975 is handled. Duration 140 ms by bot id=7489659416
+INFO:aiogram.event:Update id=446795976 is handled. Duration 134 ms by bot id=7489659416
+INFO:aiogram.event:Update id=446795977 is handled. Duration 84 ms by bot id=7489659416
+INFO:root:Command: /log_water 300 from 6954257
+INFO:aiogram.event:Update id=446795978 is not handled. Duration 513 ms by bot id=7489659416
+ERROR:aiogram.event:Cause exception while process update id=446795978 by bot id=7489659416
+TypeError: '>' not supported between instances of 'NoneType' and 'int'
+Traceback (most recent call last):
+  File "/Users/mc/miniconda3/envs/ml/lib/python3.12/site-packages/aiogram/dispatcher/dispatcher.py", line 309, in _process_update
+    response = await self.feed_update(bot, update, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/mc/miniconda3/envs/ml/lib/python3.12/site-packages/aiogram/dispatcher/dispatcher.py", line 158, in feed_update
+    response = await self.update.wrap_outer_middleware(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/mc/miniconda3/envs/ml/lib/python3.12/site-packages/aiogram/dispatcher/middlewares/error.py", line 25, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/mc/miniconda3/envs/ml/lib/python3.12/site-packages/aiogram/dispatcher/middlewares/user_context.py", line 56, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/mc/miniconda3/envs/ml/lib/python3.12/site-packages/aiogram/fsm/middleware.py", line 42, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/mc/miniconda3/envs/ml/lib/python3.12/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/mc/miniconda3/envs/ml/lib/python3.12/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "/Users/mc/miniconda3/envs/ml/lib/python3.12/site-packages/aiogram/dispatcher/dispatcher.py", line 276, in _listen_update
+    return await self.propagate_event(update_type=update_type, event=event, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/mc/miniconda3/envs/ml/lib/python3.12/site-packages/aiogram/dispatcher/router.py", line 146, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/mc/miniconda3/envs/ml/lib/python3.12/site-packages/aiogram/dispatcher/router.py", line 141, in _wrapped
+    return await self._propagate_event(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/mc/miniconda3/envs/ml/lib/python3.12/site-packages/aiogram/dispatcher/router.py", line 174, in _propagate_event
+    response = await router.propagate_event(update_type=update_type, event=event, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/mc/miniconda3/envs/ml/lib/python3.12/site-packages/aiogram/dispatcher/router.py", line 146, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/mc/miniconda3/envs/ml/lib/python3.12/site-packages/aiogram/dispatcher/router.py", line 141, in _wrapped
+    return await self._propagate_event(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/mc/miniconda3/envs/ml/lib/python3.12/site-packages/aiogram/dispatcher/router.py", line 166, in _propagate_event
+    response = await observer.trigger(event, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/mc/miniconda3/envs/ml/lib/python3.12/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/mc/hse/AppliedPython/HW-2-BOT/middleware.py", line 14, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/mc/hse/AppliedPython/HW-2-BOT/middleware.py", line 30, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/mc/miniconda3/envs/ml/lib/python3.12/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "/Users/mc/hse/AppliedPython/HW-2-BOT/bot.py", line 187, in log_water
+    need_water, rest_water = await utils.get_water_norma(profile)
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/mc/hse/AppliedPython/HW-2-BOT/utils.py", line 81, in get_water_norma
+    if temp > 25:
+       ^^^^^^^^^
+TypeError: '>' not supported between instances of 'NoneType' and 'int'
+WARNING:aiogram.dispatcher:Received SIGINT signal
+INFO:aiogram.dispatcher:Polling stopped for bot @snatched_waist_bot id=7489659416 - 'snatched_waist'
+INFO:aiogram.dispatcher:Polling stopped
+INFO:aiogram.dispatcher:Start polling
+INFO:aiogram.dispatcher:Run polling for bot @snatched_waist_bot id=7489659416 - 'snatched_waist'
+WARNING:aiogram.dispatcher:Received SIGINT signal
+INFO:aiogram.dispatcher:Polling stopped for bot @snatched_waist_bot id=7489659416 - 'snatched_waist'
+INFO:aiogram.dispatcher:Polling stopped
+INFO:aiogram.dispatcher:Start polling
+INFO:aiogram.dispatcher:Run polling for bot @snatched_waist_bot id=7489659416 - 'snatched_waist'
+WARNING:aiogram.dispatcher:Received SIGINT signal
+INFO:aiogram.dispatcher:Polling stopped for bot @snatched_waist_bot id=7489659416 - 'snatched_waist'
+INFO:aiogram.dispatcher:Polling stopped
+INFO:aiogram.dispatcher:Start polling
+INFO:aiogram.dispatcher:Run polling for bot @snatched_waist_bot id=7489659416 - 'snatched_waist'
+INFO:root:Command: /set_profile from 6954257
+INFO:aiogram.event:Update id=446795979 is handled. Duration 283 ms by bot id=7489659416
+INFO:aiogram.event:Update id=446795980 is handled. Duration 91 ms by bot id=7489659416
+INFO:aiogram.event:Update id=446795981 is handled. Duration 160 ms by bot id=7489659416
+INFO:aiogram.event:Update id=446795982 is handled. Duration 108 ms by bot id=7489659416
+INFO:aiogram.event:Update id=446795983 is handled. Duration 140 ms by bot id=7489659416
+INFO:aiogram.event:Update id=446795984 is handled. Duration 101 ms by bot id=7489659416
+INFO:root:Command: /log_water 300 from 6954257
+INFO:aiogram.event:Update id=446795985 is handled. Duration 364 ms by bot id=7489659416
+WARNING:aiogram.dispatcher:Received SIGINT signal
+INFO:aiogram.dispatcher:Polling stopped for bot @snatched_waist_bot id=7489659416 - 'snatched_waist'
+INFO:aiogram.dispatcher:Polling stopped
+INFO:aiogram.dispatcher:Start polling
+INFO:aiogram.dispatcher:Run polling for bot @snatched_waist_bot id=7489659416 - 'snatched_waist'
+INFO:root:Command: /set_profile from 6954257
+INFO:aiogram.event:Update id=446795986 is handled. Duration 265 ms by bot id=7489659416
+INFO:aiogram.event:Update id=446795987 is handled. Duration 123 ms by bot id=7489659416
+INFO:aiogram.event:Update id=446795988 is handled. Duration 119 ms by bot id=7489659416
+INFO:aiogram.event:Update id=446795989 is handled. Duration 114 ms by bot id=7489659416
+INFO:aiogram.event:Update id=446795990 is handled. Duration 97 ms by bot id=7489659416
+INFO:aiogram.event:Update id=446795991 is handled. Duration 125 ms by bot id=7489659416
+INFO:root:Command: /log_water 300 from 6954257
+INFO:aiogram.event:Update id=446795992 is handled. Duration 663 ms by bot id=7489659416
+INFO:root:Command: /show_graph water from 6954257
+INFO:aiogram.event:Update id=446795993 is handled. Duration 857 ms by bot id=7489659416
+INFO:root:Command: /log_water 500 from 6954257
+INFO:aiogram.event:Update id=446795994 is handled. Duration 229 ms by bot id=7489659416
+INFO:root:Command: /show_graph water from 6954257
+INFO:aiogram.event:Update id=446795995 is handled. Duration 429 ms by bot id=7489659416
+INFO:root:Command: /check_progress from 6954257
+INFO:aiogram.event:Update id=446795996 is handled. Duration 339 ms by bot id=7489659416
+WARNING:aiogram.dispatcher:Received SIGINT signal
+INFO:aiogram.dispatcher:Polling stopped for bot @snatched_waist_bot id=7489659416 - 'snatched_waist'
+INFO:aiogram.dispatcher:Polling stopped
+INFO:aiogram.dispatcher:Start polling
+INFO:aiogram.dispatcher:Run polling for bot @snatched_waist_bot id=7489659416 - 'snatched_waist'
+INFO:root:Command: /start from 6954257
+INFO:aiogram.event:Update id=446795997 is handled. Duration 253 ms by bot id=7489659416
+INFO:root:Command: /set_profile from 6954257
+INFO:aiogram.event:Update id=446795998 is handled. Duration 133 ms by bot id=7489659416
+INFO:aiogram.event:Update id=446795999 is handled. Duration 93 ms by bot id=7489659416
+INFO:aiogram.event:Update id=446796000 is handled. Duration 90 ms by bot id=7489659416
+INFO:aiogram.event:Update id=446796001 is handled. Duration 135 ms by bot id=7489659416
+INFO:aiogram.event:Update id=446796002 is handled. Duration 163 ms by bot id=7489659416
+INFO:aiogram.event:Update id=446796003 is handled. Duration 145 ms by bot id=7489659416
+INFO:root:Command: /log_water 300 from 6954257
+INFO:aiogram.event:Update id=446796004 is handled. Duration 390 ms by bot id=7489659416
+INFO:root:Command: /log_water 500 from 6954257
+INFO:aiogram.event:Update id=446796005 is handled. Duration 229 ms by bot id=7489659416
+INFO:root:Command: /log_water 300 from 6954257
+INFO:aiogram.event:Update id=446796006 is handled. Duration 270 ms by bot id=7489659416
+INFO:root:Command: /log_water 1300 from 6954257
+INFO:aiogram.event:Update id=446796007 is handled. Duration 382 ms by bot id=7489659416
+INFO:root:Command: /show_graph water from 6954257
+INFO:aiogram.event:Update id=446796008 is handled. Duration 614 ms by bot id=7489659416
+WARNING:aiogram.dispatcher:Received SIGINT signal
+INFO:aiogram.dispatcher:Polling stopped for bot @snatched_waist_bot id=7489659416 - 'snatched_waist'
+INFO:aiogram.dispatcher:Polling stopped
+INFO:aiogram.dispatcher:Start polling
+INFO:aiogram.dispatcher:Run polling for bot @snatched_waist_bot id=7489659416 - 'snatched_waist'
+INFO:root:Command: /help from 6954257
+INFO:aiogram.event:Update id=446796009 is handled. Duration 264 ms by bot id=7489659416
+WARNING:aiogram.dispatcher:Received SIGINT signal
+INFO:aiogram.dispatcher:Polling stopped for bot @snatched_waist_bot id=7489659416 - 'snatched_waist'
+INFO:aiogram.dispatcher:Polling stopped
+INFO:aiogram.dispatcher:Start polling
+INFO:aiogram.dispatcher:Run polling for bot @snatched_waist_bot id=7489659416 - 'snatched_waist'
+INFO:root:Command: /start_day from 6954257
+INFO:aiogram.event:Update id=446796010 is handled. Duration 295 ms by bot id=7489659416
+INFO:root:Command: /set_profile from 6954257
+INFO:aiogram.event:Update id=446796011 is handled. Duration 107 ms by bot id=7489659416
+INFO:aiogram.event:Update id=446796012 is handled. Duration 92 ms by bot id=7489659416
+INFO:aiogram.event:Update id=446796013 is handled. Duration 126 ms by bot id=7489659416
+INFO:aiogram.event:Update id=446796014 is handled. Duration 91 ms by bot id=7489659416
+INFO:aiogram.event:Update id=446796015 is handled. Duration 121 ms by bot id=7489659416
+INFO:aiogram.event:Update id=446796016 is handled. Duration 120 ms by bot id=7489659416
+INFO:root:Command: /start_day from 6954257
+INFO:aiogram.event:Update id=446796017 is handled. Duration 168 ms by bot id=7489659416
+INFO:root:Command: /profile from 6954257
+INFO:aiogram.event:Update id=446796018 is handled. Duration 173 ms by bot id=7489659416
+WARNING:aiogram.dispatcher:Received SIGINT signal
+INFO:aiogram.dispatcher:Polling stopped for bot @snatched_waist_bot id=7489659416 - 'snatched_waist'
+INFO:aiogram.dispatcher:Polling stopped
