@@ -55,6 +55,7 @@ async def show_help(message: Message, state: FSMContext):
     await message.reply("Доступные команды:\n"
                         "/help - помощь\n"
                         "/set_profile - установить профиль\n"
+                        "/clear_profile - удалить профиль\n"
                         "/start_day - начать день\n"
                         "/log_water - залогировать выпитую воду\n"
                         "/log_food - залогировать потребленные калории\n"
@@ -112,6 +113,14 @@ async def set_city(message: Message, state: FSMContext):
     await state.update_data(is_fill_profile=True)
     await state.set_state(state=None)
     await message.reply("Ваши данные успешно сохранены.\n Если хотите, можете указать цель по калориям на день: /calorie_goal <число>\n\n" + str(db[message.from_user.id]))
+
+
+@profile_router.message(Command("clear_profile"))
+async def set_city(message: Message, state: FSMContext):
+    await state.clear()
+    db.pop(message.from_user.id, None)
+    await state.update_data(is_fill_profile=False)
+    await message.reply("Профиль удален Надо заново заполнить его через /set_profile")
 
 
 @profile_router.message(Command("start_day"))
