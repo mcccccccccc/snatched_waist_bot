@@ -51,6 +51,7 @@ calc_router.message.middleware(CheckFillProfileMiddleware(db=db))
 @dp.message(Command("start"))
 @help_router.message(Command("help"))
 async def show_help(message: Message, state: FSMContext):
+    await state.clear()
     await state.update_data(user_id=message.from_user.id, is_fill_profile=False)
     await message.reply("Доступные команды:\n"
                         "/help - помощь\n"
