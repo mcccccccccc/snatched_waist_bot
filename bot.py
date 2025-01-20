@@ -55,7 +55,7 @@ async def show_help(message: Message, state: FSMContext):
     await message.reply("Доступные команды:\n"
                         "/help - помощь\n"
                         "/set_profile - установить профиль\n"
-                        "/clear_profile - удалить профиль\n"
+                        "/clear_profile - очистить профиль\n"
                         "/start_day - начать день\n"
                         "/log_water - залогировать выпитую воду\n"
                         "/log_food - залогировать потребленные калории\n"
@@ -106,13 +106,16 @@ async def set_activity(message: Message, state: FSMContext):
 async def set_city(message: Message, state: FSMContext):
     await state.update_data(city=str(message.text))
     data = await state.get_data()
-
-    db[message.from_user.id] = Profile(**data)
-    db[message.from_user.id].today = date.today()
-
+    profile = Profile(**data)
+    profile.today = date.today()
+    profile.calorie_goal = utils.get_calories_norma(profile)
+    # save to profile storage
+    db[message.from_user.id] = profile
     await state.update_data(is_fill_profile=True)
     await state.set_state(state=None)
-    await message.reply("Ваши данные успешно сохранены.\n Если хотите, можете указать цель по калориям на день: /calorie_goal <число>\n\n" + str(db[message.from_user.id]))
+    await message.reply("Ваши данные успешно сохранены.\n"
+                        "Цель по калориям рассчитана автоматически. Если хотите, можете указать цель по калориям на день: /calorie_goal <число>\n"
+                        "\n\n" + str(db[message.from_user.id]))
 
 
 @profile_router.message(Command("clear_profile"))
@@ -164,8 +167,9 @@ async def log_water(message: Message, profile: Profile):
 
     profile.logged_water += amount
     profile.trace_water.append((datetime.datetime.now(), amount))
-
     need_water, rest_water = await utils.get_water_norma(profile)
+    rest_water = need_water - profile.logged_water
+
     await message.reply(f"Данные успешно сохранены.\nВыпито: {profile.logged_water} мл.\nОсталось: {rest_water} мл из {need_water} мл.")
 
 
@@ -185,7 +189,8 @@ async def log_food(message: Message, profile: Profile):
     profile.trace_food.append((datetime.datetime.now(), cals_total))
 
     await message.reply(
-        f"{food}  - {cals_100} ккал на 100 грамм.\nВы съели {weight} грамм.\n Записано {cals_total} ккал.")
+        f"{food}  - {cals_100} ккал на 100 грамм.\nВы съели {weight} грамм.\n Записано {cals_total} ккал.\n"
+        f"Ваша норма калорий на сегодня {profile.calorie_goal}.")
 
 
 @calc_router.message(Command("log_workout"))
@@ -202,7 +207,11 @@ async def log_workout(message: Message, profile: Profile):
     profile.logged_calories += cals
     need_water = 200 * activity_duration // 30
 
-    await message.reply(f"{activity_type} {activity_duration} - {cals} ккал. Не забудьте выпить {need_water} мл воды.")
+    profile.trace_workout.append((datetime.datetime.now(), activity_duration))
+    left_to_norma = profile.calorie_goal - profile.logged_calories
+
+    await message.reply(f"{activity_type} {activity_duration} - {cals} ккал. Не забудьте выпить {need_water} мл воды.\n"
+                        f"Осталось {left_to_norma} из {profile.calorie_goal} ккал до цели на сегодня.")
 
 @calc_router.message(Command("check_progress"))
 async def check_progress(message: Message, profile: Profile):

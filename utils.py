@@ -71,16 +71,26 @@ async def get_workout_calories(activity: str, minutes: int, weight_kg, height, a
 
 
 async def get_water_norma(profile: Profile):
-    # data = await state.get_data()
     need_water = profile.weight * 30 + 500
     need_water += 500 * profile.activity // 30
-
     temp = await get_weather(profile.city)
     if temp > 25:
         need_water += 500
-    rest_water = need_water - profile.logged_water
 
-    return need_water, rest_water
+    return need_water
+
+
+def get_calories_norma(profile: Profile):
+#     Норма калорий:
+# Калории=10×Вес (кг)+6.25×Рост (см)−5×Возраст
+#
+# + Уровень активности добавляет калории (200-400 в зависимости от времени и типа тренировки). Можете указать формулу на свой выбор
+#
+# Можете использовать другие формулы по желанию. Можете использовать в расчётах другие параметры, запрашиваемые у пользователя, например, пол.
+    cal_norma = 10 * profile.weight + 6.25 * profile.height - 5 * profile.age
+    cal_norma += 200 * profile.activity // 30
+
+    return cal_norma
 
 async def get_progress(profile: Profile) -> str:
     data = profile.to_dict()
