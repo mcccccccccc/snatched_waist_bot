@@ -3,7 +3,7 @@ import datetime
 from datetime import date
 from typing import Dict
 from config import config
-from aiogram import Bot, Dispatcher, Router, types
+from aiogram import Bot, Dispatcher, Router
 from aiogram.types import Message, BufferedInputFile
 from aiogram.filters import Command
 from aiogram.fsm.state import State, StatesGroup
@@ -75,28 +75,47 @@ async def set_profile(message: Message, state: FSMContext):
 
 @profile_router.message(Form.weight)
 async def set_weight(message: Message, state: FSMContext):
-    await state.update_data(weight=int(message.text))
+    try:
+        await state.update_data(weight=int(message.text))
+    except (IndexError, ValueError):
+        await message.reply("Пожалуйста, укажите ваш вес в килограммах.")
+        return
     await message.reply("Введите ваш рост (в см):")
     await state.set_state(Form.height)
 
 
 @profile_router.message(Form.height)
 async def set_height(message: Message, state: FSMContext):
-    await state.update_data(height=int(message.text))
+    try:
+        await state.update_data(height=int(message.text))
+    except (IndexError, ValueError):
+        await message.reply("Пожалуйста, укажите ваш рост в см.")
+        return
+
     await message.reply("Введите ваш возраст:")
     await state.set_state(Form.age)
 
 
 @profile_router.message(Form.age)
 async def set_age(message: Message, state: FSMContext):
-    await state.update_data(age=int(message.text))
+    try:
+        await state.update_data(age=int(message.text))
+    except (IndexError, ValueError):
+        await message.reply("Пожалуйста, укажите ваш возраст.")
+        return
+
     await message.reply("Сколько минут активности у вас в день?")
     await state.set_state(Form.activity)
 
 
 @profile_router.message(Form.activity)
 async def set_activity(message: Message, state: FSMContext):
-    await state.update_data(activity=int(message.text))
+    try:
+        await state.update_data(activity=int(message.text))
+    except (IndexError, ValueError):
+        await message.reply("Пожалуйста, укажите количество минут активности в день.")
+        return
+
     await message.reply("В каком городе вы находитесь?")
     await state.set_state(Form.city)
 
@@ -119,7 +138,7 @@ async def set_city(message: Message, state: FSMContext):
 
 
 @profile_router.message(Command("clear_profile"))
-async def set_city(message: Message, state: FSMContext):
+async def clear_profile(message: Message, state: FSMContext):
     await state.clear()
     db.pop(message.from_user.id, None)
     await state.update_data(is_fill_profile=False)

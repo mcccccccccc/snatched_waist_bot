@@ -117,6 +117,7 @@ async def fetch_async(url):
             return await response.json()
 
 
+# test
 if __name__ == "__main__":
     import asyncio
     # res = asyncio.run(get_workout_calories("running", 60, 70, 180, 25))
