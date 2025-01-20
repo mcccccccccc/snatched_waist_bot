@@ -1,11 +1,9 @@
 import logging
-from typing import Dict
-
 from aiogram import BaseMiddleware
 from aiogram.types import Message
 
 
-logging.basicConfig(filename='bot_commands.log', level=logging.INFO)
+logging.basicConfig(filename='../bot_commands.log', level=logging.INFO)
 
 class CommandLoggingMiddleware(BaseMiddleware):
     async def __call__(self, handler, event: Message, data):

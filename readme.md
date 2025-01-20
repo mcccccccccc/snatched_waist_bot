@@ -99,8 +99,19 @@ class Profile:
 
 Запустить контейнер:
 
-`docker run -it --rm -d --name mc_bot_container mc_bot`
+`docker run -it --rm -d --name mc_bot_container -v ./bot_commands.log:/app/bot_commands.log mc_bot`
+
 
 ### Скриншоты
 
 Скриншоты работы сервиса лежат в директории [pics](pics)
+
+## Deploy
+
+### render.com:
+
+![render_com.png](pics/render_com.png)
+
+### VPS:
+
+![vps.png](pics/vps.png)
