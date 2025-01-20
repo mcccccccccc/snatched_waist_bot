@@ -187,7 +187,7 @@ async def log_water(message: Message, profile: Profile):
 
     profile.logged_water += amount
     profile.trace_water.append((datetime.datetime.now(), amount))
-    need_water, rest_water = await utils.get_water_norma(profile)
+    need_water = await utils.get_water_norma(profile)
     rest_water = need_water - profile.logged_water
 
     await message.reply(f"Данные успешно сохранены.\nВыпито: {profile.logged_water} мл.\nОсталось: {rest_water} мл из {need_water} мл.")

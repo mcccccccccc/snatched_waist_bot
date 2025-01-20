@@ -1,3 +1,5 @@
+import logging
+
 import aiohttp
 from config import config
 from user_profile import Profile
@@ -23,7 +25,12 @@ async def get_food_calories_100g(product_name: str) -> int:
 async def get_weather(city: str):
     api_key = config.openweathermap_api_key.get_secret_value()
     url = f"http://api.openweathermap.org/data/2.5/weather?q={city}&appid={api_key}&units=metric"
-    response = await fetch_async(url)
+    try:
+        response = await fetch_async(url)
+    except Exception as e:
+        logging.exception(e)
+        return None
+
     current_temp = response['main']['temp'] if 'main' in response else None
     return current_temp
 
@@ -93,21 +100,20 @@ def get_calories_norma(profile: Profile):
     return cal_norma
 
 async def get_progress(profile: Profile) -> str:
-    data = profile.to_dict()
-    need_water = data['weight'] * 30 + 500
-    need_water += 500 * data['activity'] // 30
-
-    temp = await get_weather(data['city'])
-    if temp > 25:
-        need_water += 500
-    rest_water = need_water - data['logged_water']
-
-    cal_norma = 10 * data['weight'] + 6.25 * data['height'] - 5 * data['age']
-    cal_get = data['logged_calories']
-    cal_burn = data['burned_calories']
+    need_water = await get_water_norma(profile)
+    rest_water = need_water - profile.logged_water
+    cal_get = profile.logged_calories
+    cal_burn = profile.burned_calories
     cal_balance = cal_get - cal_burn
 
-    res = f"📊 Прогресс:\nВода:\n- Выпито: {data['logged_water']} мл из {need_water} мл.\n- Осталось: {rest_water} мл.\n\nКалории:\n- Потреблено: {cal_get} ккал из {cal_norma} ккал.\n- Сожжено: {cal_burn} ккал.\n- Баланс: {cal_balance} ккал."
+    res = (f"📊 Прогресс:\n"
+           f"Вода:\n"
+           f"- Выпито: {profile.logged_water} мл из {need_water} мл.\n"
+           f"- Осталось: {rest_water} мл.\n\n"
+           f"Калории:\n"
+           f"- Потреблено: {cal_get} ккал из {profile.calorie_goal} ккал.\n"
+           f"- Сожжено: {cal_burn} ккал.\n"
+           f"- Баланс: {cal_balance} ккал.")
 
     return res
 
